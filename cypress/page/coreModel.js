@@ -54,15 +54,6 @@ class CoreModel {
   async clickVideoPlayback() {
     cy.get(this.videoElement.videoContainer).should("be.visible").click();
   }
-
-  async manageVideo(eventHandler) {
-    cy.window().then((win) => {
-      win.console.log(
-        win.Chartboost.EventHandler.handleNativeEvent(eventHandler),
-        win
-      );
-    });
-  }
 }
 
 module.exports = { CoreModel };

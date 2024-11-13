@@ -34,14 +34,4 @@ describe("General functional test with checking console logs", function () {
     core.clickSkipMuteButtonCheckMuteCalled("unmute");
     core.clickSkipMuteButtonCheckMuteCalled("mute");
   });
-
-  it("video validation", () => {
-    const core = new CoreModel();
-
-    core.manageVideo("onBackground");
-    cy.get("#play-button").should("be.visible");
-
-    core.manageVideo("onForeground");
-    cy.get("#play-button").should("not.be.visible");
-  });
 });

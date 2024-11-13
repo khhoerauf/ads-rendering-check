@@ -1874,7 +1874,7 @@
                   t.deviceId &&
                   ((e = new XMLHttpRequest()).open(
                     "POST",
-                    "https://live.chartboost.com/api/user_agent"
+                    "https://localhost.com/api/user_agent"
                   ),
                   e.setRequestHeader("Content-Type", "application/json"),
                   e.send(JSON.stringify(t)));
@@ -1955,6 +1955,12 @@
             },
             show: function () {
               o("show");
+              (o = new XMLHttpRequest()).open(
+                "POST",
+                "https://localhost.com/api/show"
+              ),
+                o.setRequestHeader("Content-Type", "application/json"),
+                o.send(JSON.stringify(o));
             },
             tracking: function (e) {
               o("tracking", { event: e });
@@ -1990,9 +1996,20 @@
               );
             },
             show: function () {
-              r("show");
+              (t = new XMLHttpRequest()).open(
+                "POST",
+                "https://localhost.com/api/show"
+              ),
+                t.setRequestHeader("Content-Type", "application/json"),
+                t.send(JSON.stringify(t));
             },
             tracking: function (e) {
+              (e = new XMLHttpRequest()).open(
+                "POST",
+                "https://localhost.com/api/imptrackers"
+              ),
+                e.setRequestHeader("Content-Type", "application/json"),
+                e.send(JSON.stringify(e));
               "imptrackers" === e
                 ? r(
                     "tracking",
@@ -2150,7 +2167,7 @@
                   t.deviceId &&
                   ((e = new XMLHttpRequest()).open(
                     "POST",
-                    "https://live.chartboost.com/api/user_agent"
+                    "https://localhost.com/api/user_agent"
                   ),
                   e.setRequestHeader("Content-Type", "application/json"),
                   e.send(JSON.stringify(t)));
@@ -11339,9 +11356,7 @@
                   t
                 );
               }
-              r.init({
-                dsn: "https://d77a05e7b25c4d93b15dd2bee2177096@sentry.io/243530",
-              }),
+              r.init(),
                 r.configureScope(function (t) {
                   t.setTag("template-name", "video-template"),
                     Chartboost.Params &&
