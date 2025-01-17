@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: E2E Tests
 
 on: push
 
@@ -16,3 +16,4 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: npm run cy:ci
+          browser: chrome
