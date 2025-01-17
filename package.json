@@ -6,6 +6,7 @@
 	"scripts": {
 		"cy:open": "cypress open",
 		"cy:run": "cypress run --headless",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"cy:ci": "npm run format && npm run cy:run"
 	}
 }
