@@ -1,88 +1,88 @@
 <!doctype html>
 <html>
-  <head>
-    <title>MRAID Ad Example</title>
-    <style>
-      body,
-      html {
-        margin: 0; /* It does NOT contribute to the overall width of an element*/
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        font-family: "Open Sans", sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f2f2f2;
-      }
+	<head>
+		<title>MRAID Ad Example</title>
+		<style>
+			body,
+			html {
+				margin: 0; /* It does NOT contribute to the overall width of an element*/
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				font-family: 'Open Sans', sans-serif;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: #f2f2f2;
+			}
 
-      h2 {
-        color: #68a376;
-        font-size: 23px;
-      }
+			h2 {
+				color: #68a376;
+				font-size: 23px;
+			}
 
-      #adContainer {
-        width: 300px;
-        height: 250px;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        text-align: center;
-        padding: 10px;
-        box-sizing: border-box;
-        /* any border and padding in the width and heigh */
-      }
+			#adContainer {
+				width: 300px;
+				height: 250px;
+				background-color: #fff;
+				border: 1px solid #ccc;
+				text-align: center;
+				padding: 10px;
+				box-sizing: border-box;
+				/* any border and padding in the width and heigh */
+			}
 
-      #ctaButton {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #28a745;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        margin-top: 15px;
-        cursor: pointer;
-      }
+			#ctaButton {
+				display: inline-block;
+				padding: 10px 20px;
+				background-color: #28a745;
+				color: #fff;
+				text-decoration: none;
+				border-radius: 5px;
+				margin-top: 15px;
+				cursor: pointer;
+			}
 
-      @font-face {
-        font-family: "MyWebFont";
-        src: url("myfont.woff2") format("woff2");
-      }
-    </style>
-    <script src="mraid.js"></script>
-    <script>
-      function init() {
-        if (mraid.getState() === "loading") {
-          mraid.addEventListener("ready", showAd);
-        } else {
-          showAd();
-        }
-      }
+			@font-face {
+				font-family: 'MyWebFont';
+				src: url('myfont.woff2') format('woff2');
+			}
+		</style>
+		<script src="mraid.js"></script>
+		<script>
+			function init() {
+				if (mraid.getState() === 'loading') {
+					mraid.addEventListener('ready', showAd)
+				} else {
+					showAd()
+				}
+			}
 
-      function showAd() {
-        // Check if the environment supports expand functionality
-        if (mraid.isViewable()) {
-          console.log("Ad is viewable!");
-        }
+			function showAd() {
+				// Check if the environment supports expand functionality
+				if (mraid.isViewable()) {
+					console.log('Ad is viewable!')
+				}
 
-        // Event to handle click and expand the ad
-        document
-          .getElementById("ctaButton")
-          .addEventListener("click", function () {
-            if (mraid.isViewable()) {
-              mraid.open("https://www.example.com"); // Replace with target URL
-            }
-          });
-      }
+				// Event to handle click and expand the ad
+				document
+					.getElementById('ctaButton')
+					.addEventListener('click', function () {
+						if (mraid.isViewable()) {
+							mraid.open('https://www.example.com') // Replace with target URL
+						}
+					})
+			}
 
-      document.addEventListener("DOMContentLoaded", init);
-    </script>
-  </head>
-  <body>
-    <div id="adContainer">
-      <h2>Get Ready for Adventure!</h2>
-      <p>Click below to learn more about our latest offerings.</p>
-      <div id="ctaButton">Learn More</div>
-    </div>
-  </body>
+			document.addEventListener('DOMContentLoaded', init)
+		</script>
+	</head>
+	<body>
+		<div id="adContainer">
+			<h2>Get Ready for Adventure!</h2>
+			<p>Click below to learn more about our latest offerings.</p>
+			<div id="ctaButton">Learn More</div>
+		</div>
+	</body>
 </html>

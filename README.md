@@ -2,7 +2,6 @@
 
 This repository contains a set of Cypress end-to-end tests for validating VAST (Video Ad Serving Template) and MRAID (Mobile Rich Media Ad Interface Definition) ad units in web pages. The purpose of these tests is to ensure that video ads, banner ads, and rich media ads conform to the VAST and MRAID standards, are rendered correctly, and behave as expected across different scenarios.
 
-
 ## Folder Structure
 
 ```
@@ -30,10 +29,10 @@ portfolio-cypress/
 
 ## Getting Started
 
-Once you have Node.js installed, you can install the required dependencies. 
+Once you have Node.js installed, you can install the required dependencies.
 Run the following command in your terminal:
 
--   `npm install`
+- `npm install`
 
 ## Running Tests
 
@@ -41,7 +40,7 @@ Run the following command in your terminal:
 
 To run the tests using the Cypress GUI, execute the following command in your terminal:
 
--  `npx cypress open`
+- `npx cypress open`
 
 This will open the Cypress application, allowing you to select and run individual tests or the entire suite.
 

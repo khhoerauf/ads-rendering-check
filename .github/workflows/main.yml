@@ -12,6 +12,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Formatting check
+        run: npm run format
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
