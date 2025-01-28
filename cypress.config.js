@@ -5,5 +5,6 @@ module.exports = defineConfig({
 		viewportWidth: 640,
 		viewportHeight: 1136,
 		video: false,
+		experimentalWebKitSupport: true,
 	},
 })

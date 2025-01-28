@@ -1,12 +1,14 @@
 {
 	"devDependencies": {
 		"cypress": "^14.0.0",
+		"playwright-webkit": "^1.50.0",
 		"prettier": "^3.3.3"
 	},
 	"scripts": {
 		"cy:open": "cypress open",
-		"cy:run": "cypress run --headless",
-		"cy:ci": "npm run format && npm run cy:run",
+		"cy:run:chrome": "cypress run --browser chrome",
+		"cy:run:firefox": "cypress run --browser firefox",
+		"cy:run:webkit": "cypress run --browser webkit",
 		"format": "prettier --write ."
 	}
 }

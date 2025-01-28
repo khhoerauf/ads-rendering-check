@@ -41,8 +41,10 @@ portfolio-cypress/
 
 #### Using Cypress in headless mode
 
-- Run `npm run cy:run` to execute all tests in a headless Electron browser.
+- Run `npm run cy:run:chrome` to execute all tests in a headless Chrome browser.
+- Run `npm run cy:run:firefox` to execute all tests in a headless Firefox browser.
+- Run `npm run cy:run:webkit` to execute all tests in a headless Webkit browser (Safari).
 
 #### Using Cypress in CI/CD
 
-- Run npm `run cy:ci` to execute tests in a CI/CD pipeline, including a formatting script prior to tests.
+- CI/CD pipeline tests are executed using `cypress-io/github-action@v6`. Instructions for specifying the browser can be found [here](https://github.com/cypress-io/github-action/blob/v6/README.md#browser).
