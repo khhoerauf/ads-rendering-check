@@ -1,13 +1,11 @@
 const { CoreModel } = require('../page/coreModel')
 const { MraidModel } = require('../page/mraidModel')
 
-	
 describe('General functional test with checking console logs', function () {
 	it('VAST | plays video in mobile viewport', () => {
 		const core = new CoreModel()
 		cy.visitFixtureFile('video-ad')
 		cy.spyConsoleLog('spyConsoleLog')
-		
 
 		core.checkVideoDisplayed()
 	})
@@ -43,7 +41,7 @@ describe('General functional test with checking console logs', function () {
 
 	it('MRAID | static ad has CTA button', function () {
 		const mraid = new MraidModel()
-		cy.visitFixtureFile('mraid-ad');
+		cy.visitFixtureFile('mraid-ad')
 
 		mraid.clickCtaButton()
 	})

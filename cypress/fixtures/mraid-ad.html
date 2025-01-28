@@ -53,16 +53,16 @@
 		<script>
 			function init() {
 				if (typeof mraid === 'undefined') {
-                    console.error('MRAID is not defined');
-                    return;
-                }
+					console.error('MRAID is not defined')
+					return
+				}
 
-                if (mraid.getState() === 'loading') {
-                    mraid.addEventListener('ready', showAd)
-                } else {
-                    showAd()
-                }
-            }
+				if (mraid.getState() === 'loading') {
+					mraid.addEventListener('ready', showAd)
+				} else {
+					showAd()
+				}
+			}
 
 			function showAd() {
 				// Check if the environment supports expand functionality
