@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Run npm format command
+npm run format
+
+# Optional: Check if there are files to be committed after formatting.
+# If there are none, cancel the commit.
+if ! git diff --cached --exit-code --quiet; then
+    echo "Code was formatted. Please review changes and commit again."
+    exit 1
+fi

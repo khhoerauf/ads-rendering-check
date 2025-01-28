@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: E2E Tests
 
 on: push
 
@@ -12,7 +12,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Cypress run
+      - name: E2E on Chrome
         uses: cypress-io/github-action@v6
         with:
-          start: npx cypress run --headless
+          browser: chrome

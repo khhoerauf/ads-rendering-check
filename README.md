@@ -2,7 +2,6 @@
 
 This repository contains a set of Cypress end-to-end tests for validating VAST (Video Ad Serving Template) and MRAID (Mobile Rich Media Ad Interface Definition) ad units in web pages. The purpose of these tests is to ensure that video ads, banner ads, and rich media ads conform to the VAST and MRAID standards, are rendered correctly, and behave as expected across different scenarios.
 
-
 ## Folder Structure
 
 ```
@@ -13,7 +12,7 @@ portfolio-cypress/
 │   ├── page/          # Page Object Model (POM) files for test abstraction
 │   └── support/       # Utilities and helper functions
 │   └── screenshots/   # Snapshots from visual tests
-├── cypress.conf.js    # WebdriverIO configuration
+├── cypress.conf.js    # Cypress default configuration
 └── package.json       # Node.js dependencies and scripts
 ```
 
@@ -30,25 +29,22 @@ portfolio-cypress/
 
 ## Getting Started
 
-Once you have Node.js installed, you can install the required dependencies. 
-Run the following command in your terminal:
+### Install Dependencies
 
--   `npm install`
+- Run `npm install` to install the required dependencies.
 
-## Running Tests
+### Running Tests
 
-### Using Cypress GUI
+#### Using Cypress GUI
 
-To run the tests using the Cypress GUI, execute the following command in your terminal:
+- Run `npm run cy:open` to open the Cypress application and run tests interactively.
 
--  `npx cypress open`
+#### Using Cypress in headless mode
 
-This will open the Cypress application, allowing you to select and run individual tests or the entire suite.
+- Run `npm run cy:run:chrome` to execute all tests in a headless Chrome browser.
+- Run `npm run cy:run:firefox` to execute all tests in a headless Firefox browser.
+- Run `npm run cy:run:webkit` to execute all tests in a headless Webkit browser (Safari).
 
-### Using Cypress in Terminal
+#### Using Cypress in CI/CD
 
-To run all tests using the headless Electron browser (Chromium), execute the following command in your terminal:
-
-- `npx cypress run --headless`
-
-This will run all the tests in a headless mode without opening the Cypress GUI.
+- CI/CD pipeline tests are executed using `cypress-io/github-action@v6`. Instructions for specifying the browser can be found [here](https://github.com/cypress-io/github-action/blob/v6/README.md#browser).
