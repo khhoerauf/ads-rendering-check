@@ -2,21 +2,21 @@ const { VideoElements } = require('./elements/videoElement')
 
 class CoreModel {
 	constructor() {
-		this.videoElement = new VideoElements()
+		this.videoElements = new VideoElements()
 	}
 
 	async checkVideoDisplayed() {
-		cy.get(this.videoElement.videoContainer).should('be.visible')
+		cy.get(this.videoElements.videoContainer).should('be.visible')
 		cy.get('@spyConsoleLog').should('be.calledWith', 'Chartboost.Utils.show')
 	}
 
 	async waitAndClickSkipButton(amountToWait) {
 		cy.wait(amountToWait)
-		cy.get(this.videoElement.skipButton).should('be.visible').click()
+		cy.get(this.videoElements.skipButton).should('be.visible').click()
 	}
 
 	async clickHudCheckClickCalled() {
-		cy.get(this.videoElement.hudContainer)
+		cy.get(this.videoElements.hudContainer)
 			.should('be.visible')
 			.contains('Download Now')
 			.click()
@@ -29,7 +29,7 @@ class CoreModel {
 	}
 
 	async clickCloseButtonCheckCloseCalled() {
-		cy.get(this.videoElement.closeButton)
+		cy.get(this.videoElements.closeButton)
 			.should('be.visible')
 			.click()
 			.then(() => {
@@ -38,7 +38,7 @@ class CoreModel {
 	}
 
 	async clickSkipMuteButtonCheckMuteCalled(actionCalled) {
-		cy.get(this.videoElement.muteImage)
+		cy.get(this.videoElements.muteImage)
 			.should('be.visible')
 			.click()
 			.then(() => {
@@ -52,7 +52,7 @@ class CoreModel {
 	}
 
 	async clickVideoPlayback() {
-		cy.get(this.videoElement.videoContainer).should('be.visible').click()
+		cy.get(this.videoElements.videoContainer).should('be.visible').click()
 	}
 }
 

@@ -1,37 +1,50 @@
 const { CoreModel } = require('../page/coreModel')
+const { MraidModel } = require('../page/mraidModel')
 
-beforeEach(() => {
-	cy.visitFixtureFile('video-ad')
-	cy.spyConsoleLog('spyConsoleLog')
-})
-
+	
 describe('General functional test with checking console logs', function () {
-	it('plays video in mobile viewport', () => {
+	it('VAST | plays video in mobile viewport', () => {
 		const core = new CoreModel()
+		cy.visitFixtureFile('video-ad')
+		cy.spyConsoleLog('spyConsoleLog')
+		
 
 		core.checkVideoDisplayed()
 	})
 
-	it('allows to skip ad after 5 seconds and close', () => {
+	it('VAST | allows to skip ad after 5 seconds and close', () => {
 		const core = new CoreModel()
+		cy.visitFixtureFile('video-ad')
+		cy.spyConsoleLog('spyConsoleLog')
 
 		core.waitAndClickSkipButton(5000)
 		core.clickCloseButtonCheckCloseCalled()
 	})
 
-	it('allows to click on HUD model', function () {
+	it('VAST | allows to click on HUD model', function () {
 		const core = new CoreModel()
+		cy.visitFixtureFile('video-ad')
+		cy.spyConsoleLog('spyConsoleLog')
 
 		core.clickVideoPlayback()
 		core.clickHudCheckClickCalled()
 	})
 
-	it('mute button validation', function () {
+	it('VAST | mute button validation', function () {
 		const core = new CoreModel()
+		cy.visitFixtureFile('video-ad')
+		cy.spyConsoleLog('spyConsoleLog')
 
 		core.checkVideoDisplayed()
 
 		core.clickSkipMuteButtonCheckMuteCalled('unmute')
 		core.clickSkipMuteButtonCheckMuteCalled('mute')
+	})
+
+	it('MRAID | static ad has CTA button', function () {
+		const mraid = new MraidModel()
+		cy.visitFixtureFile('mraid-ad');
+
+		mraid.clickCtaButton()
 	})
 })
