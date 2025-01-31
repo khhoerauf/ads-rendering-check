@@ -1,12 +1,13 @@
 class VideoElements {
 	constructor() {
-		this.skipButton = '.skip-button-img'
-		this.videoContainer = '#video-player'
-		this.portraitContainer = '#landing-portrait-container'
-		this.hudContainer = '#hud-container'
-		this.hudClickButton = '#hud-cta'
-		this.closeButton = '#close-button'
-		this.muteImage = '#mute-image'
+		this.landingCard = '#landingCard'
+		this.startVideoButton = '#startButton'
+		this.videoContainer = '#video'
+		this.skipButton = '#skipButton'
+		this.endCard = '#endCard'
+		this.ctaButton = '#ctaButton'
+		this.replayVideo = '#restartButton'
+		this.closeButton = '#closeButton'
 	}
 }
 
