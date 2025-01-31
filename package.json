@@ -1,14 +1,18 @@
 {
 	"devDependencies": {
 		"cypress": "^14.0.0",
+		"cypress-image-diff-html-report": "^2.2.0",
+		"cypress-image-diff-js": "^2.3.0",
+		"i": "^0.3.7",
+		"npm": "^11.1.0",
 		"playwright-webkit": "^1.50.0",
 		"prettier": "^3.3.3"
 	},
 	"scripts": {
 		"cy:open": "cypress open",
 		"cy:run:chrome": "cypress run --browser chrome",
-		"cy:run:firefox": "cypress run --browser firefox",
-		"cy:run:webkit": "cypress run --browser webkit",
+		"cy:run:firefox": "cypress run --browser firefox --spec cypress/e2e/functional-*test.js",
+		"cy:run:webkit": "cypress run --browser webkit --spec cypress/e2e/functional-*test.js",
 		"format": "prettier --write ."
 	}
 }
