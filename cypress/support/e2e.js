@@ -1,5 +1,5 @@
-require('./commands')
+require('./commands');
 
 after(() => {
-	cy.task('generateReport')
-})
+	cy.task('generateReport');
+});

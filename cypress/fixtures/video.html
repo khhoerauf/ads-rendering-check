@@ -175,83 +175,83 @@
 		</div>
 
 		<script>
-			const landingCard = document.getElementById('landingCard')
-			const video = document.getElementById('video')
-			const endCard = document.getElementById('endCard')
-			const startButton = document.getElementById('startButton')
-			const skipButton = document.getElementById('skipButton')
-			let playtimeTracker
+			const landingCard = document.getElementById('landingCard');
+			const video = document.getElementById('video');
+			const endCard = document.getElementById('endCard');
+			const startButton = document.getElementById('startButton');
+			const skipButton = document.getElementById('skipButton');
+			let playtimeTracker;
 
 			function sendTrackingEvent(eventType, extraData = '') {
-				const trackingUrl = `https://fake-tracking.com/event?event=${eventType}&timestamp=${Date.now()}${extraData}`
-				console.log(`Tracking: ${trackingUrl}`)
+				const trackingUrl = `https://fake-tracking.com/event?event=${eventType}&timestamp=${Date.now()}${extraData}`;
+				console.log(`Tracking: ${trackingUrl}`);
 
 				// Simulate sending request
-				fetch(trackingUrl, { method: 'GET', mode: 'no-cors' }).catch(() => {})
+				fetch(trackingUrl, { method: 'GET', mode: 'no-cors' }).catch(() => {});
 			}
 
 			function startVideo() {
-				sendTrackingEvent('user_start_button_clicked') // Tracking for user interaction
-				landingCard.style.display = 'none' // Hide landing screen
-				video.style.display = 'block' // Show video
-				video.play()
+				sendTrackingEvent('user_start_button_clicked'); // Tracking for user interaction
+				landingCard.style.display = 'none'; // Hide landing screen
+				video.style.display = 'block'; // Show video
+				video.play();
 			}
 
 			video.addEventListener('play', function () {
-				sendTrackingEvent('video_started')
-				startTrackingPlaytime()
-			})
+				sendTrackingEvent('video_started');
+				startTrackingPlaytime();
+			});
 
 			function startTrackingPlaytime() {
 				playtimeTracker = setInterval(() => {
 					sendTrackingEvent(
 						'video_playtime',
 						`&time=${Math.floor(video.currentTime)}`
-					)
-				}, 5000) // Every 5 seconds
+					);
+				}, 5000); // Every 5 seconds
 			}
 
 			video.addEventListener('ended', function () {
-				clearInterval(playtimeTracker) // Stop playtime tracking
-				sendTrackingEvent('video_ended')
-				video.style.display = 'none' // Hide video
-				endCard.style.display = 'flex' // Show end card
-				sendTrackingEvent('end_card_shown') // Track end card visibility
-				skipButton.style.display = 'none' // Hide skip button when end card is shown
-			})
+				clearInterval(playtimeTracker); // Stop playtime tracking
+				sendTrackingEvent('video_ended');
+				video.style.display = 'none'; // Hide video
+				endCard.style.display = 'flex'; // Show end card
+				sendTrackingEvent('end_card_shown'); // Track end card visibility
+				skipButton.style.display = 'none'; // Hide skip button when end card is shown
+			});
 
 			function restartVideo() {
-				sendTrackingEvent('replay_button_clicked')
-				endCard.style.display = 'none' // Hide end card
-				video.style.display = 'block' // Show video
-				video.currentTime = 0 // Reset video
-				video.play()
+				sendTrackingEvent('replay_button_clicked');
+				endCard.style.display = 'none'; // Hide end card
+				video.style.display = 'block'; // Show video
+				video.currentTime = 0; // Reset video
+				video.play();
 			}
 
 			function closeEndCard() {
-				sendTrackingEvent('close_button_clicked')
-				endCard.style.display = 'none' // Close end card
-				video.style.display = 'none' // Optionally hide the video as well
-				landingCard.style.display = 'none' // Optionally show the landing card again
+				sendTrackingEvent('close_button_clicked');
+				endCard.style.display = 'none'; // Close end card
+				video.style.display = 'none'; // Optionally hide the video as well
+				landingCard.style.display = 'none'; // Optionally show the landing card again
 			}
 
 			function skipVideo() {
-				sendTrackingEvent('skip_button_clicked') // Track when the skip button is clicked
-				video.currentTime = video.duration // Skip to the end of the video
+				sendTrackingEvent('skip_button_clicked'); // Track when the skip button is clicked
+				video.currentTime = video.duration; // Skip to the end of the video
 			}
 
 			// Automatically click the Start Video button after 2 seconds
 			setTimeout(() => {
-				sendTrackingEvent('auto_start_button_clicked') // Tracking for automatic action
-				startButton.click()
-			}, 2000)
+				sendTrackingEvent('auto_start_button_clicked'); // Tracking for automatic action
+				startButton.click();
+			}, 2000);
 
 			// Show Skip button after 5 seconds of video playing
 			video.addEventListener('playing', function () {
 				setTimeout(() => {
-					skipButton.style.display = 'block' // Show skip button after 5 seconds
-				}, 5000)
-			})
+					skipButton.style.display = 'block'; // Show skip button after 5 seconds
+				}, 5000);
+			});
 		</script>
 	</body>
 </html>

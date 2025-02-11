@@ -53,21 +53,21 @@
 		<script>
 			function init() {
 				if (typeof mraid === 'undefined') {
-					console.error('MRAID is not defined')
-					return
+					console.error('MRAID is not defined');
+					return;
 				}
 
 				if (mraid.getState() === 'loading') {
-					mraid.addEventListener('ready', showAd)
+					mraid.addEventListener('ready', showAd);
 				} else {
-					showAd()
+					showAd();
 				}
 			}
 
 			function showAd() {
 				// Check if the environment supports expand functionality
 				if (mraid.isViewable()) {
-					console.log('Ad is viewable!')
+					console.log('Ad is viewable!');
 				}
 
 				// Event to handle click and expand the ad
@@ -75,12 +75,12 @@
 					.getElementById('ctaButton')
 					.addEventListener('click', function () {
 						if (mraid.isViewable()) {
-							mraid.open('https://www.example.com') // Replace with target URL
+							mraid.open('https://www.example.com'); // Replace with target URL
 						}
-					})
+					});
 			}
 
-			document.addEventListener('DOMContentLoaded', init)
+			document.addEventListener('DOMContentLoaded', init);
 		</script>
 	</head>
 	<body>
