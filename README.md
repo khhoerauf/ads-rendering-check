@@ -46,13 +46,13 @@ ads-rendering-check/
 - Run `npm run cy:open` to open the Cypress application and run functional tests interactively.
 - `IMPORTANT`: Please do not execute visual tests in Cypress GUI mode. If you do, remember not to push changes to baseline snapshots.
 
-Here’s an example of how you might execute tests locally by using 'only' tag:  
+Here’s an example of how you might execute tests locally by using 'only' tag:
+
 ```
 it.only('allows to skip video after 5 seconds'...
 ```
+
 https://github.com/user-attachments/assets/a043925e-f2bc-4152-8d0c-e28212aaba02
-
-
 
 #### Using Cypress in headless mode
 
