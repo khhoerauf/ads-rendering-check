@@ -2,7 +2,7 @@ const { VideoModel } = require('../page/videoModel');
 const { MraidModel } = require('../page/mraidModel');
 
 describe('General functionality with tracking checks', function () {
-	it.only('allows to skip video after 5 seconds', function () {
+	it('allows to skip video after 5 seconds', function () {
 		const video = new VideoModel();
 
 		cy.visitFixtureFile('video');
