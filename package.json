@@ -11,11 +11,12 @@
 	"scripts": {
 		"cy:open": "cypress open",
 		"cy:run:chrome": "cypress run --browser chrome",
+		"cy:run:visual": "cypress run --browser chrome --spec cypress/e2e/visual-*test.js",
 		"cy:run:firefox": "cypress run --browser firefox --spec cypress/e2e/functional-*test.js",
 		"cy:run:webkit": "cypress run --browser webkit --spec cypress/e2e/functional-*test.js",
 		"format": "prettier --write ."
 	},
 	"dependencies": {
-		"brace-expansion": "^4.0.1"
+		"brace-expansion": "^5.0.5"
 	}
 }
