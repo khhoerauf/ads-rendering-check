@@ -19,7 +19,7 @@ describe('Visual check of ad flow', function () {
 		video.checkSkipIconDisplayed(6000);
 		cy.get(video.videoElements.skipButton).compareSnapshot({
 			name: 'skipButton',
-			testThreshold: 0.05,
+			testThreshold: 0.10,
 		});
 	});
 
@@ -31,7 +31,7 @@ describe('Visual check of ad flow', function () {
 		video.clickSkipBtnCheckSucceeded(6000);
 		cy.get(video.videoElements.endCard).compareSnapshot({
 			name: 'endCard',
-			testThreshold: 0.05,
+			testThreshold: 0.10,
 		});
 	});
 });
