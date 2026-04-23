@@ -9,6 +9,8 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,9 +27,14 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
 
-      - name: Upload visual diff report
+      - name: Bundle screenshots into report folder
         if: always()
-        uses: actions/upload-artifact@v4
+        run: cp -r cypress-image-diff-screenshots cypress-image-diff-html-report/cypress-image-diff-screenshots
+
+      - name: Publish visual diff report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: visual-diff-report
-          path: cypress-image-diff-html-report
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: cypress-image-diff-html-report
+          destination_dir: visual-report
