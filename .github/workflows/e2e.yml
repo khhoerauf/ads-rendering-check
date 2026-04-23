@@ -10,18 +10,18 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  cypress-run:
+  functional-tests:
+    name: Functional Tests
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cypress run E2E on Chrome
+      - name: Cypress run functional tests on Chrome
         uses: cypress-io/github-action@v7
         with:
           browser: chrome
+          spec: cypress/e2e/functional-*test.js
 
       - name: Upload screenshots on failure
         if: failure()
@@ -29,6 +29,21 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+
+  visual-tests:
+    name: Visual Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run visual tests on Chrome
+        uses: cypress-io/github-action@v7
+        with:
+          browser: chrome
+          spec: cypress/e2e/visual-*test.js
 
       - name: Bundle screenshots alongside report folder
         if: always()
