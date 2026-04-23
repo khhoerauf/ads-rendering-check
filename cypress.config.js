@@ -4,9 +4,12 @@ const getCompareSnapshotsPlugin = require('cypress-image-diff-js/plugin');
 module.exports = defineConfig({
 	e2e: {
 		setupNodeEvents(on, config) {
-			config.env.apiUrl = 'https://fake-tracking.com/event';
 			return getCompareSnapshotsPlugin(on, config);
 		},
+		expose: {
+			apiUrl: 'https://fake-tracking.com/event',
+		},
+		allowCypressEnv: false,
 		viewportWidth: 640,
 		viewportHeight: 1136,
 		video: false,

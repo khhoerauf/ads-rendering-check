@@ -19,14 +19,14 @@ ads-rendering-check/
 │   ├── baseline/                    # Expected snapshots used for visual test comparison
 │   ├── comparison/                  # Actual snapshots generated after test execution
 │   └── diff/                        # Snapshots highlighting discrepancies after test execution
-├── cypress.conf.js                  # Cypress default configuration file
+├── cypress.config.js                # Cypress default configuration file
 └── package.json                     # Node.js dependencies and scripts
 ```
 
 ## Test Files
 
-1. Functional Tests, located in: `cypress/integration/functional-*test.js`
-2. Visual Tests, located in: `cypress/integration/visual-*test.js`
+1. Functional Tests, located in: `cypress/e2e/functional-*test.js`
+2. Visual Tests, located in: `cypress/e2e/visual-*test.js`
 
 ## Precondition
 
@@ -62,4 +62,4 @@ https://github.com/user-attachments/assets/a043925e-f2bc-4152-8d0c-e28212aaba02
 
 #### Using Cypress in CI/CD
 
-- CI/CD pipeline tests are executed using `cypress-io/github-action@v6`. Instructions for specifying the browser can be found [here](https://github.com/cypress-io/github-action/blob/v6/README.md#browser).
+- CI/CD pipeline tests are executed using `cypress-io/github-action@v7`. Instructions for specifying the browser can be found [here](https://github.com/cypress-io/github-action/blob/v6/README.md#browser).
