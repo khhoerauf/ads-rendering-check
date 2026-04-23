@@ -1,4 +1,4 @@
-const { VideoElements } = require('./elements/videoElement');
+const { VideoElements } = require('./elements/videoElements');
 const { NetworkModel } = require('./networkModel');
 
 class VideoModel {
@@ -10,18 +10,18 @@ class VideoModel {
 		this.network.interceptTracking('end_card_shown');
 	}
 
-	async checkVideoDisplayed() {
+	checkVideoDisplayed() {
 		cy.get(this.videoElements.videoContainer).should('be.visible');
 		this.network.checkTrackingExist('video_started');
 	}
 
-	async checkSkipIconDisplayed(timeToWait) {
+	checkSkipIconDisplayed(timeToWait) {
 		cy.get(this.videoElements.skipButton, { timeout: timeToWait }).should(
 			'be.visible'
 		);
 	}
 
-	async clickSkipBtnCheckSucceeded(timeToWait) {
+	clickSkipBtnCheckSucceeded(timeToWait) {
 		this.network.interceptTracking('skip_button_clicked');
 		cy.get(this.videoElements.skipButton, { timeout: timeToWait })
 			.should('be.visible')
@@ -29,16 +29,25 @@ class VideoModel {
 		this.network.checkTrackingExist('skip_button_clicked');
 	}
 
-	async waitAndClickSkipButton(amountToWait) {
+	waitAndClickSkipButton(amountToWait) {
 		cy.wait(amountToWait);
 		cy.get(this.videoElements.skipButton).should('be.visible').click();
 	}
 
-	async clickCloseButtonCheckCloseCalled() {
+	clickCloseButtonCheckCloseCalled() {
+		this.network.interceptTracking('close_button_clicked');
 		cy.get(this.videoElements.closeButton).should('be.visible').click();
+		this.network.checkTrackingExist('close_button_clicked');
 	}
 
-	async checkVideoPlaybackContinue(videoDuration) {
+	clickReplayButtonCheckSucceeded() {
+		this.network.interceptTracking('replay_button_clicked');
+		cy.get(this.videoElements.replayVideo).should('be.visible').click();
+		this.network.checkTrackingExist('replay_button_clicked');
+		cy.get(this.videoElements.videoContainer).should('be.visible');
+	}
+
+	checkVideoPlaybackContinue(videoDuration) {
 		const frequency =
 			(videoDuration * 1000) / this.network.trackingVideoPlaytimeFrequency;
 
@@ -55,7 +64,7 @@ class VideoModel {
 		cy.get(this.videoElements.videoContainer).should('not.be.visible');
 	}
 
-	async checkEndCardDisplayed() {
+	checkEndCardDisplayed() {
 		cy.get(this.videoElements.endCard).should('be.visible');
 		this.network.checkTrackingExist('end_card_shown');
 	}

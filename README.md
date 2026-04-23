@@ -19,14 +19,14 @@ ads-rendering-check/
 │   ├── baseline/                    # Expected snapshots used for visual test comparison
 │   ├── comparison/                  # Actual snapshots generated after test execution
 │   └── diff/                        # Snapshots highlighting discrepancies after test execution
-├── cypress.conf.js                  # Cypress default configuration file
+├── cypress.config.js                # Cypress default configuration file
 └── package.json                     # Node.js dependencies and scripts
 ```
 
 ## Test Files
 
-1. Functional Tests, located in: `cypress/integration/functional-*test.js`
-2. Visual Tests, located in: `cypress/integration/visual-*test.js`
+1. Functional Tests, located in: `cypress/e2e/functional-*test.js`
+2. Visual Tests, located in: `cypress/e2e/visual-*test.js`
 
 ## Precondition
 
@@ -46,7 +46,7 @@ ads-rendering-check/
 - Run `npm run cy:open` to open the Cypress application and run functional tests interactively.
 - `IMPORTANT`: Please do not execute visual tests in Cypress GUI mode. If you do, remember not to push changes to baseline snapshots.
 
-Here’s an example of how you might execute tests locally by using 'only' tag:
+Here's an example of how you might execute tests locally by using 'only' tag:
 
 ```
 it.only('allows to skip video after 5 seconds'...
@@ -59,7 +59,22 @@ https://github.com/user-attachments/assets/a043925e-f2bc-4152-8d0c-e28212aaba02
 - Run `npm run cy:run:chrome` to execute all tests in a headless Chrome browser.
 - Run `npm run cy:run:firefox` to execute all tests in a headless Firefox browser.
 - Run `npm run cy:run:webkit` to execute all tests in a headless Webkit browser (Safari).
+- Run `npm run cy:run:visual` to execute visual tests only in Chrome.
+- Run `npm run cy:run:all` to execute all tests across all supported browsers.
 
 #### Using Cypress in CI/CD
 
-- CI/CD pipeline tests are executed using `cypress-io/github-action@v6`. Instructions for specifying the browser can be found [here](https://github.com/cypress-io/github-action/blob/v6/README.md#browser).
+The CI/CD pipeline runs two separate jobs on every push and pull request to `main`:
+
+- **Functional Tests** — runs `functional-*test.js` on Chrome
+- **Visual Tests** — runs `visual-*test.js` on Chrome and publishes the diff report to GitHub Pages
+
+Pipeline is powered by `cypress-io/github-action@v7`. Browser configuration docs can be found [here](https://github.com/cypress-io/github-action/blob/v7/README.md#browser).
+
+## 📸 Visual Test Report
+
+Latest visual diff results are published automatically after each run on `main`: **[View Visual Test Report](https://khhoerauf.github.io/ads-rendering-check/visual-report/cypress-image-diff-html-report.html)**
+
+Example of failed results:
+
+![Cypress Image Diff Report](docs/assets/visual-report-example.png)

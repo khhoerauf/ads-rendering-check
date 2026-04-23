@@ -1,6 +1,6 @@
 class NetworkModel {
 	constructor() {
-		this.api = Cypress.env('apiUrl');
+		this.api = Cypress.expose('apiUrl');
 		this.trackingVideoPlaytimeFrequency = 5000;
 	}
 

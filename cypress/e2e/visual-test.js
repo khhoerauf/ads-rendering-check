@@ -1,17 +1,17 @@
 const { VideoModel } = require('../page/videoModel');
 
 describe('Visual check of ad flow', function () {
-	it('landingCard', () => {
+	it('should display landing card on initial load', () => {
 		const video = new VideoModel();
 
 		cy.visitFixtureFile('video');
 		cy.get(video.videoElements.landingCard).compareSnapshot({
 			name: 'landingCard',
-			testThreshold: 0.2,
+			testThreshold: 0.05,
 		});
 	});
 
-	it('skip button', () => {
+	it('should show skip button after 5 seconds of playback', () => {
 		const video = new VideoModel();
 
 		cy.visitFixtureFile('video');
@@ -19,11 +19,11 @@ describe('Visual check of ad flow', function () {
 		video.checkSkipIconDisplayed(6000);
 		cy.get(video.videoElements.skipButton).compareSnapshot({
 			name: 'skipButton',
-			testThreshold: 0.2,
+			testThreshold: 0.12,
 		});
 	});
 
-	it('end card', () => {
+	it('should display end card after video completes', () => {
 		const video = new VideoModel();
 
 		cy.visitFixtureFile('video');
@@ -31,7 +31,7 @@ describe('Visual check of ad flow', function () {
 		video.clickSkipBtnCheckSucceeded(6000);
 		cy.get(video.videoElements.endCard).compareSnapshot({
 			name: 'endCard',
-			testThreshold: 0.2,
+			testThreshold: 0.1,
 		});
 	});
 });

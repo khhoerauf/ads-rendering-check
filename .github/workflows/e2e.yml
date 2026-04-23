@@ -1,18 +1,61 @@
 name: E2E Tests
 
-on: push
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  cypress-run:
+  functional-tests:
+    name: Functional Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: E2E on Chrome
-        uses: cypress-io/github-action@v6
+
+      - name: Cypress run functional tests on Chrome
+        uses: cypress-io/github-action@v7
         with:
           browser: chrome
+          spec: cypress/e2e/functional-*test.js
+
+
+  visual-tests:
+    name: Visual Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run visual tests on Chrome
+        uses: cypress-io/github-action@v7
+        with:
+          browser: chrome
+          spec: cypress/e2e/visual-*test.js
+
+      - name: Bundle screenshots alongside report folder
+        if: always()
+        run: |
+          mkdir -p gh-pages-publish/visual-report
+          cp -r cypress-image-diff-html-report/. gh-pages-publish/visual-report/
+          cp -r cypress-image-diff-screenshots gh-pages-publish/cypress-image-diff-screenshots
+
+      - name: Publish visual diff report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages-publish
+          keep_files: false
+
+      - name: Add visual report link to job summary
+        if: failure()
+        run: |
+          echo "## 📸 Visual Test Report" >> $GITHUB_STEP_SUMMARY
+          echo "[View Visual Diff Report](https://khhoerauf.github.io/ads-rendering-check/visual-report/cypress-image-diff-html-report.html)" >> $GITHUB_STEP_SUMMARY

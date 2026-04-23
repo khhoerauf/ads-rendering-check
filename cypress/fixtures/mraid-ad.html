@@ -51,6 +51,13 @@
 		</style>
 		<script src="mraid.js"></script>
 		<script>
+			function sendTrackingEvent(eventType, extraData = '') {
+				const trackingUrl = `https://fake-tracking.com/event?event=${eventType}&timestamp=${Date.now()}${extraData}`;
+				console.log(`Tracking: ${trackingUrl}`);
+
+				fetch(trackingUrl, { method: 'GET', mode: 'no-cors' }).catch(() => {});
+			}
+
 			function init() {
 				if (typeof mraid === 'undefined') {
 					console.error('MRAID is not defined');
@@ -65,22 +72,31 @@
 			}
 
 			function showAd() {
+				sendTrackingEvent('ad_loaded');
+
 				// Check if the environment supports expand functionality
 				if (mraid.isViewable()) {
 					console.log('Ad is viewable!');
+					sendTrackingEvent('ad_viewable');
 				}
+			}
 
-				// Event to handle click and expand the ad
+			document.addEventListener('DOMContentLoaded', function () {
+				sendTrackingEvent('ad_impression');
+				init();
+
+				// Attach CTA click handler regardless of MRAID availability
 				document
 					.getElementById('ctaButton')
 					.addEventListener('click', function () {
-						if (mraid.isViewable()) {
-							mraid.open('https://www.example.com'); // Replace with target URL
+						sendTrackingEvent('cta_clicked');
+						if (typeof mraid !== 'undefined' && mraid.isViewable()) {
+							mraid.open('https://www.example.com');
+						} else {
+							window.open('https://www.example.com', '_blank');
 						}
 					});
-			}
-
-			document.addEventListener('DOMContentLoaded', init);
+			});
 		</script>
 	</head>
 	<body>
