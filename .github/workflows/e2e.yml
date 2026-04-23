@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -27,14 +30,23 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
 
-      - name: Bundle screenshots into report folder
+      - name: Bundle screenshots alongside report folder
         if: always()
-        run: cp -r cypress-image-diff-screenshots cypress-image-diff-html-report/cypress-image-diff-screenshots
+        run: |
+          mkdir -p gh-pages-publish/visual-report
+          cp -r cypress-image-diff-html-report/. gh-pages-publish/visual-report/
+          cp -r cypress-image-diff-screenshots gh-pages-publish/cypress-image-diff-screenshots
 
       - name: Publish visual diff report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: cypress-image-diff-html-report
-          destination_dir: visual-report
+          publish_dir: gh-pages-publish
+          keep_files: false
+
+      - name: Add visual report link to job summary
+        if: always()
+        run: |
+          echo "## 📸 Visual Test Report" >> $GITHUB_STEP_SUMMARY
+          echo "[View Visual Diff Report](https://khhoerauf.github.io/ads-rendering-check/visual-report/cypress-image-diff-html-report.html)" >> $GITHUB_STEP_SUMMARY
