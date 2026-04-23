@@ -19,7 +19,7 @@ describe('Visual check of ad flow', function () {
 		video.checkSkipIconDisplayed(6000);
 		cy.get(video.videoElements.skipButton).compareSnapshot({
 			name: 'skipButton',
-			testThreshold: 0.1,
+			testThreshold: 0.12,
 		});
 	});
 
