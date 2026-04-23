@@ -44,10 +44,10 @@
       ]
     }
   ],
-  "startedAt": "2026-04-23T14:37:31.891Z",
-  "endedAt": "2026-04-23T14:38:48.839Z",
-  "duration": 75501,
+  "startedAt": "2026-04-23T14:51:43.954Z",
+  "endedAt": "2026-04-23T14:52:59.375Z",
+  "duration": 73819,
   "browserName": "chrome",
-  "browserVersion": "147.0.7727.55",
+  "browserVersion": "147.0.7727.101",
   "cypressVersion": "15.14.1"
 }
