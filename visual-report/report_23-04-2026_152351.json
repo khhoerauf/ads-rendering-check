@@ -44,9 +44,9 @@
       ]
     }
   ],
-  "startedAt": "2026-04-23T15:16:21.453Z",
-  "endedAt": "2026-04-23T15:16:36.985Z",
-  "duration": 15532,
+  "startedAt": "2026-04-23T15:23:51.469Z",
+  "endedAt": "2026-04-23T15:24:06.903Z",
+  "duration": 15434,
   "browserName": "chrome",
   "browserVersion": "147.0.7727.55",
   "cypressVersion": "15.14.1"
