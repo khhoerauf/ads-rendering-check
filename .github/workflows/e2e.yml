@@ -23,12 +23,6 @@ jobs:
           browser: chrome
           spec: cypress/e2e/functional-*test.js
 
-      - name: Upload screenshots on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
 
   visual-tests:
     name: Visual Tests
@@ -61,7 +55,7 @@ jobs:
           keep_files: false
 
       - name: Add visual report link to job summary
-        if: always()
+        if: failure()
         run: |
           echo "## 📸 Visual Test Report" >> $GITHUB_STEP_SUMMARY
           echo "[View Visual Diff Report](https://khhoerauf.github.io/ads-rendering-check/visual-report/cypress-image-diff-html-report.html)" >> $GITHUB_STEP_SUMMARY
