@@ -1,8 +1,6 @@
-class MraidElements {
-	constructor() {
-		this.adContainer = '#adContainer';
-		this.ctaButton = '#ctaButton';
-	}
-}
+const mraidSelectors = {
+	adContainer: '#adContainer',
+	ctaButton: '#ctaButton',
+};
 
-module.exports = { MraidElements };
+module.exports = { mraidSelectors };

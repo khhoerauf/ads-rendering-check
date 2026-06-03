@@ -1,14 +1,12 @@
-class VideoElements {
-	constructor() {
-		this.landingCard = '#landingCard';
-		this.startVideoButton = '#startButton';
-		this.videoContainer = '#video';
-		this.skipButton = '#skipButton';
-		this.endCard = '#endCard';
-		this.ctaButton = '#ctaButton';
-		this.replayVideo = '#restartButton';
-		this.closeButton = '#closeButton';
-	}
-}
+const videoSelectors = {
+	landingCard: '#landingCard',
+	startVideoButton: '#startButton',
+	videoContainer: '#video',
+	skipButton: '#skipButton',
+	endCard: '#endCard',
+	ctaButton: '#ctaButton',
+	replayVideo: '#restartButton',
+	closeButton: '#closeButton',
+};
 
-module.exports = { VideoElements };
+module.exports = { videoSelectors };

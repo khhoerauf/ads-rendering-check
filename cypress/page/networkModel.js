@@ -1,19 +1,29 @@
 class NetworkModel {
 	constructor() {
-		this.api = Cypress.expose('apiUrl');
-		this.trackingVideoPlaytimeFrequency = 5000;
+		this.apiUrl = Cypress.expose('apiUrl');
 	}
 
-	async interceptTracking(eventType) {
-		cy.intercept('GET', `${this.api}?event=${eventType}*`, []).as(
-			`getTracking-${eventType}`
-		);
+	trackingAlias(eventType) {
+		return `tracking-${eventType}`;
 	}
 
-	async checkTrackingExist(eventType) {
-		cy.wait(`@getTracking-${eventType}`).then(interception => {
-			expect(interception.response.statusCode).to.equal(200);
-		});
+	interceptTracking(eventType) {
+		cy.intercept('GET', `${this.apiUrl}?event=${eventType}*`, {
+			statusCode: 200,
+			body: {},
+		}).as(this.trackingAlias(eventType));
+	}
+
+	interceptTrackingEvents(eventTypes) {
+		eventTypes.forEach(eventType => this.interceptTracking(eventType));
+	}
+
+	checkTrackingCalled(eventType, { timeout } = {}) {
+		const waitOptions = timeout !== undefined ? { timeout } : {};
+
+		cy.wait(`@${this.trackingAlias(eventType)}`, waitOptions)
+			.its('response.statusCode')
+			.should('eq', 200);
 	}
 }
 

@@ -1,53 +1,55 @@
 const { VideoModel } = require('../page/videoModel');
 const { MraidModel } = require('../page/mraidModel');
+const { VIDEO } = require('../support/constants');
 
-describe('General functionality with tracking checks', function () {
-	it('video should be able to skip after 5 seconds', function () {
-		const video = new VideoModel();
+describe('General functionality with tracking checks', () => {
+	describe('Video ad', () => {
+		let video;
 
-		cy.visitFixtureFile('video');
-		video.checkVideoDisplayed();
-		video.clickSkipBtnCheckSucceeded(6000);
-		video.checkEndCardDisplayed();
+		beforeEach(() => {
+			video = new VideoModel();
+			video.setupIntercepts();
+			cy.visitFixtureFile('video');
+		});
+
+		it('should be skippable after 5 seconds', () => {
+			video.checkVideoDisplayed();
+			video.skipToEndCard();
+		});
+
+		it('should show end card after video finishes', () => {
+			video.checkVideoDisplayed();
+			video.checkVideoPlaysToEnd(VIDEO.durationSeconds);
+			video.checkEndCardDisplayed();
+		});
+
+		it('should hide end card and send tracking when close button is clicked', () => {
+			video.checkVideoDisplayed();
+			video.skipToEndCard();
+			video.clickCloseButton();
+		});
+
+		it('should restart video and send tracking when replay button is clicked', () => {
+			video.checkVideoDisplayed();
+			video.skipToEndCard();
+			video.clickReplayButton();
+		});
 	});
 
-	it('end card should show after video is finished', function () {
-		const video = new VideoModel();
+	describe('MRAID static ad', () => {
+		let mraid;
 
-		cy.visitFixtureFile('video');
-		video.checkVideoDisplayed();
-		video.checkVideoPlaybackContinue(30);
-		video.checkEndCardDisplayed();
-	});
+		beforeEach(() => {
+			mraid = new MraidModel();
+			mraid.setupIntercepts();
+			cy.visitFixtureFile('mraid-ad');
+		});
 
-	it('close button should hide end card and send tracking', function () {
-		const video = new VideoModel();
-
-		cy.visitFixtureFile('video');
-		video.checkVideoDisplayed();
-		video.clickSkipBtnCheckSucceeded(6000);
-		video.checkEndCardDisplayed();
-		video.clickCloseButtonCheckCloseCalled();
-	});
-
-	it('replay button should restart video and send tracking', function () {
-		const video = new VideoModel();
-
-		cy.visitFixtureFile('video');
-		video.checkVideoDisplayed();
-		video.clickSkipBtnCheckSucceeded(6000);
-		video.checkEndCardDisplayed();
-		video.clickReplayButtonCheckSucceeded();
-	});
-
-	it('static ad should render with clickable button', function () {
-		const mraid = new MraidModel();
-		cy.visitFixtureFile('mraid-ad');
-
-		mraid.isImpressionSent();
-		mraid.clickCtaButton();
-
-		mraid.isClickTrackerSent();
-		mraid.isNewTabOpened('https://www.example.com');
+		it('should render with a clickable CTA button', () => {
+			mraid.checkImpressionSent();
+			mraid.clickCtaButton();
+			mraid.checkClickTrackerSent();
+			mraid.checkNewTabOpened('https://www.example.com');
+		});
 	});
 });

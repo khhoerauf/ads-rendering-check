@@ -23,7 +23,6 @@ jobs:
           browser: chrome
           spec: cypress/e2e/functional-*test.js
 
-
   visual-tests:
     name: Visual Tests
     runs-on: ubuntu-latest
